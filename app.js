@@ -1,34 +1,55 @@
 const express = require('express');
 const cors = require('cors');
-const mongodb = require('mongodb');
+const {MongoClient, ServerApiVersion} = require('mongodb');
+require('dotenv').config()
 
 const app = express();
 const PORT = 8000;
-const MongoClient = mongodb.MongoClient;
+const mongoURI = process.env.MONGO_URI;
 
+app.use(express.json());
 app.use(cors());
+
+const client = new MongoClient(mongoURI, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
 
 const obj = {
     "title": "express on vercel",
     "date": "April 28, 2025"
 }
 
-MongoClient.connect('mongodb+srv://bridgetorr1902:aGyiBmU0BQSZs1g6@cluster0.5payw8y.mongodb.net/Concerts?retryWrites=true&w=majority&appName=Cluster0')
-    .then(client => {
-
-        const db = client.db('SurpriseSongs');
-        const concertCollection = db.collection('Concerts');
-    })
+const run = async () => {
+    try{
+        await client.connect();
+    
+         await client.db("admin").command({ ping: 1 });
+        console.log(
+          "Pinged your deployment. You successfully connected to MongoDB!"
+        );
+    }
+    finally{
+    
+    }
+    }
+    
+    run().catch(error => console.log)
+    
 
     app.get('/', (req, res) => {
-        concertCollection
-            .find()
-            .toArray()
-            .then(results => {
-                results.sort((a,b) => b.votes - a.votes);
-                response.json(results);
-            })
-            .catch(error => console.error(error));
+        res.json(obj);
+        // concertCollection
+        //     .find()
+        //     .toArray()
+        //     .then(results => {
+        //         results.sort((a,b) => b.votes - a.votes);
+        //         response.json(results);
+        //     })
+        //     .catch(error => console.error(error));
             })
     
     app.get('/about', (req, res) => {

@@ -29,7 +29,7 @@ const obj = {
                 let concertCollection = await client.db('SurpriseSongs').collection('Concerts');
                 console.log(`concert collection is: ${concertCollection}`)
                 let results = await concertCollection.find().toArray()
-                console.log(`collections results are {JSON.stringify(results)}` );
+                console.log(`collections results are ${JSON.stringify(results)}`);
                 res.json(results);
             }
             catch(error){

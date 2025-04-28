@@ -35,7 +35,7 @@ const obj = {
             finally{}
             // }
             
-            run().catch(error => console.log)
+            // run().catch(error => console.log)
     })
         // concertCollection
         //     .find()

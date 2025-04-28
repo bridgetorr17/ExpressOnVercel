@@ -20,9 +20,11 @@ const obj = {
 
 const run = async () => {
     try{
-        await client.connect();
+        await client.connect()
+            
         concertCollection = client.db('SurpriseSongs').collection('Concerts');
 
+        console.log(concertCollection.find().toArray());
         await client.db("admin").command({ ping: 1 });
         console.log(
           "Pinged your deployment. You successfully connected to MongoDB!"
@@ -35,16 +37,17 @@ const run = async () => {
     
 
     app.get('/', (req, res) => {
-        //res.json(obj);
-        concertCollection
-            .find()
-            .toArray()
-            .then(results => {
-                results.sort((a,b) => b.votes - a.votes);
-                response.json(results);
-            })
-            .catch(error => console.error(error));
-            })
+        res.json(obj);
+    })
+        // concertCollection
+        //     .find()
+        //     .toArray()
+        //     .then(results => {
+        //         results.sort((a,b) => b.votes - a.votes);
+        //         response.json(results);
+        //     })
+        //     .catch(error => console.error(error));
+        //     })
     
     app.get('/about', (req, res) => {
         res.send('about route');

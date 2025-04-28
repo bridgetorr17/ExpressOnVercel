@@ -18,8 +18,8 @@ const obj = {
 }
     
 
-    app.get('/', (req, res) => {
-        const run = async () => {
+    app.get('/', async (req, res) => {
+    //     const run = async () => {
             try{
                 await client.connect()
                 await client.db("admin").command({ ping: 1 });
@@ -28,15 +28,13 @@ const obj = {
                 );
                 let concertCollection = await client.db('SurpriseSongs').collection('Concerts');
                 console.log('concert collection is: ' + concertCollection)
-                concertCollection
-                    .find()
-                    .toArray()
-                    .then(results => {
-                        res.json(results);
-                    })
+                let results = await concertCollection.find().toArray()
+                console.log('collections results are' + results);
+                console.log('collection json is ' + results.json())
+                res.json(results);
             }
             finally{}
-            }
+            // }
             
             run().catch(error => console.log)
     })

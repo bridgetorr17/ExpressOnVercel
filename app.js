@@ -27,12 +27,14 @@ const obj = {
                   "Pinged your deployment. You successfully connected to MongoDB!"
                 );
                 let concertCollection = await client.db('SurpriseSongs').collection('Concerts');
-                console.log('concert collection is: ' + concertCollection)
+                console.log(`concert collection is: ${concertCollection}`)
                 let results = await concertCollection.find().toArray()
-                console.log('collections results are' + results);
+                console.log(`collections results are {JSON.stringify(results)}` );
                 res.json(results);
             }
-            finally{}
+            catch(error){
+                console.error(error);
+            }
             // }
             
             // run().catch(error => console.log)

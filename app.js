@@ -30,7 +30,6 @@ const obj = {
                 console.log('concert collection is: ' + concertCollection)
                 let results = await concertCollection.find().toArray()
                 console.log('collections results are' + results);
-                console.log('collection json is ' + results.json())
                 res.json(results);
             }
             finally{}

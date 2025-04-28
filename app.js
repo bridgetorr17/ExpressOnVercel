@@ -2,9 +2,13 @@ const express = require('express');
 
 const app = express();
 const PORT = 8000;
+const obj = {
+    "title": "express on vercel",
+    "date": "April 28, 2025"
+}
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.json(obj);
 })
 
 app.get('/about', (req, res) => {

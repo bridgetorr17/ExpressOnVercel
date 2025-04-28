@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(cors());
 
 const client = new MongoClient(mongoURI);
-let concertCollection;
 
 const obj = {
     "title": "express on vercel",
@@ -22,7 +21,7 @@ const run = async () => {
     try{
         await client.connect()
             
-        concertCollection = client.db('SurpriseSongs').collection('Concerts');
+        let concertCollection = client.db('SurpriseSongs').collection('Concerts');
 
         console.log(concertCollection.find().toArray());
         await client.db("admin").command({ ping: 1 });

@@ -21,12 +21,8 @@ const obj = {
     app.get('/', async (req, res) => {
             try{
                 await client.connect()
-                await client.db("admin").command({ ping: 1 });
-                console.log(
-                  "Pinged your deployment. You successfully connected to MongoDB!"
-                );
                 let concertCollection = client.db('SupriseSongs').collection('Concerts');
-                console.log(`concert collection is: ${concertCollection}`)
+
                 let results = await concertCollection.find().toArray()
                 console.log(`collections results are ${JSON.stringify(results)}`);
                 res.send(JSON.stringify(results));
@@ -34,7 +30,10 @@ const obj = {
             catch(error){
                 console.error(error);
             }
-    })
+            finally{
+                await client.close();
+            }
+    });
     
     app.get('/about', (req, res) => {
         res.send('about route');

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const cors = require('mongodb');
+const mongodb = require('mongodb');
 
 const app = express();
 const PORT = 8000;

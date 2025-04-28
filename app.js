@@ -10,13 +10,7 @@ const mongoURI = process.env.MONGO_URI;
 app.use(express.json());
 app.use(cors());
 
-const client = new MongoClient(mongoURI, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
+const client = new MongoClient(mongoURI);
 
 const obj = {
     "title": "express on vercel",

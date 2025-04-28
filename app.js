@@ -16,27 +16,26 @@ const obj = {
     "title": "express on vercel",
     "date": "April 28, 2025"
 }
-
-const run = async () => {
-    try{
-        await client.connect()
-            
-        let concertCollection = client.db('SurpriseSongs').collection('Concerts');
-
-        console.log(concertCollection.find().toArray());
-        await client.db("admin").command({ ping: 1 });
-        console.log(
-          "Pinged your deployment. You successfully connected to MongoDB!"
-        );
-    }
-    finally{}
-    }
-    
-    run().catch(error => console.log)
     
 
     app.get('/', (req, res) => {
         res.json(obj);
+        const run = async () => {
+            try{
+                await client.connect()
+                    
+                let concertCollection = client.db('SurpriseSongs').collection('Concerts');
+        
+                console.log(concertCollection.find().toArray());
+                await client.db("admin").command({ ping: 1 });
+                console.log(
+                  "Pinged your deployment. You successfully connected to MongoDB!"
+                );
+            }
+            finally{}
+            }
+            
+            run().catch(error => console.log)
     })
         // concertCollection
         //     .find()

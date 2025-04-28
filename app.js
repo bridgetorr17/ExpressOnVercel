@@ -18,24 +18,23 @@ MongoClient.connect('mongodb+srv://bridgetorr1902:aGyiBmU0BQSZs1g6@cluster0.5pay
 
         const db = client.db('SurpriseSongs');
         const concertCollection = db.collection('Concerts');
+    })
 
-
-        app.get('/', (req, res) => {
-            concertCollection
-                .find()
-                .toArray()
-                .then(results => {
-                    results.sort((a,b) => b.votes - a.votes);
-                    response.json(results);
-                })
-                .catch(error => console.error(error));
-                })
-        
-        app.get('/about', (req, res) => {
-            res.send('about route');
-        })
-        
-        app.listen(PORT, () => {
-            console.log(`server is running on port ${PORT}`)
-        })
+    app.get('/', (req, res) => {
+        concertCollection
+            .find()
+            .toArray()
+            .then(results => {
+                results.sort((a,b) => b.votes - a.votes);
+                response.json(results);
+            })
+            .catch(error => console.error(error));
+            })
+    
+    app.get('/about', (req, res) => {
+        res.send('about route');
+    })
+    
+    app.listen(PORT, () => {
+        console.log(`server is running on port ${PORT}`)
     })
